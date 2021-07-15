@@ -1,0 +1,34 @@
+{
+    "prefix": ",",
+
+    "mute_cat": "",
+    "mute_cat_arch": "",
+    "mute_role": "",
+    "everyone_role_id": "",
+
+    "mod_roles": [
+        ""
+    ],
+
+    "bot_channels": [
+        ""
+    ],
+
+    "help": [
+        {
+            "command": "mute",
+            "usage": "mute <discord uuid>",
+            "desc": "Mutes the user with the given discord ID. Creates hidden channel for mods & the muted user."
+        },
+        {
+            "command": "unmute",
+            "usage": "unmute <discord uuid>",
+            "desc": "Releases the user with the given ID and archives the channel."
+        }
+    ],
+
+    "messages": {
+        "mute": "You have been muted. Please wait for an admin or mod to discuss with you the reason for the mute.",
+        "unmute": "You have been unmuted. You can go back to the rest of the server now."
+    }
+}
