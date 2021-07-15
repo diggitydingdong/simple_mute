@@ -35,7 +35,7 @@ messages: store the messages the bot uses.
 ## Commands
 help - see all the available commands, but as a messsage in discord
 
-mute: `mute discord uuid>`
+mute: `mute <discord uuid>`
     Mutes the user with the given discord ID. Creates hidden channel for mods & the muted user.
 
 unmute: `unmute <discord uuid>`
