@@ -106,7 +106,7 @@ client.on('message', async (message) => {
                         let muted_role = await message.guild.roles.cache.get(settings.mute_role);
                         user.roles.add(muted_role);
 
-                        message.channel.send(`User given mute role. \`,unmute ${args[1]}\` to unmute.`)
+                        message.channel.send(`User given mute role. \`,unmute ${args[1]}\` to unmute.`);
                         mute_channel.send(`<@${args[1]}> ${settings.messages.mute}`);
                     } else {
                         message.channel.send(`ERROR! Invalid mute_cat ID. Please talk to the administrator of this bot for further assistance.`);
@@ -121,7 +121,7 @@ client.on('message', async (message) => {
         } else {
             message.channel.send("Not enough arguments. Please specify a discord ID ( " + settings.prefix + "help ).");
         }
-    } else if(args[0] === "unmute") {
+    } else if(args[0] === "unmute" || args[0] === "ban") {
         if(args.length >= 2) {
             var user = await message.guild.members.fetch(args[1]);
             if(user !== undefined) {
@@ -138,7 +138,12 @@ client.on('message', async (message) => {
                             
                             let mute_role = await message.guild.roles.cache.get(settings.mute_role);
                             user.roles.remove(mute_role);
-                            ch.send(settings.messages.unmute);
+
+                            if(args[0] === "unmute") {
+                                ch.send(settings.messages.unmute);
+                            } else if(args[0] === "ban") {
+                                message.guild.members.ban(args[1]).then(u => ch.send(`User was banned.`));
+                            }
                         } else {
                             message.channel.send("Unable to find the mute channel. Contact the admin for further assistance.");
                         }
@@ -153,8 +158,20 @@ client.on('message', async (message) => {
             } else {
                 message.channel.send("Invalid user ID. ( " + settings.prefix + "help )");
             }
-        } else {
+        } 
+    } else if(args[0] === "strip") {
+        if(args.length >= 2) {
+            var user = await message.guild.members.fetch(args[1]);
+            if(user !== undefined) {
+                await user.roles.cache
+                    .filter(r => r.name !== "@everyone")
+                    .forEach(r => user.roles.remove(r));
+
+                message.channel.send("User stripped of roles.");
+            }   
+        }  
+    } else {
             message.channel.send("Not enough arguments. Please specify a discord ID ( " + settings.prefix + "help ).");
-        }
+        
     }
 });
